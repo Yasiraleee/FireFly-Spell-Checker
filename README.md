@@ -46,10 +46,12 @@ The project structure is organized as follows:
 - `templates/`: Contains HTML templates for the website.
 - `static/`: Includes CSS and JavaScript files for styling and interactive features.
 - `spell_check.py`: Implements the spell checking functionality.
-- `auto_correct.py`: Implements the auto-correct feature.
-- `synonym_antonym.py`: Provides synonym and antonym searching capabilities.
-- `word_resemblance.py`: Calculates the word resemblance between two words.
-- `part_of_speech.py`: Determines the part of speech for a given word.
+
+## Screenshots
+
+![homepage1](https://github.com/Yasiraleee/FireFly-Spell-Checker/assets/117939487/46814c0b-1d77-4d94-952f-9ad977be6f10)
+
+![homepage2](https://github.com/Yasiraleee/FireFly-Spell-Checker/assets/117939487/9b0c9cd2-27fc-4231-a422-e362b239cd30)
 
 ## Contributing
 
@@ -57,7 +59,7 @@ Contributions to FireFly are highly appreciated. If you have any suggestions, bu
 
 ## Author
 
-This project was developed by Yasir. If you have any questions or feedback, feel free to reach out to me via email at [your-email@example.com](mailto:your-email@example.com).
+This project is developed by Yasir Aleee. If you have any questions or feedback, feel free to reach out to me via email at yasirali478@gmail.com.
 
 ## License
 
