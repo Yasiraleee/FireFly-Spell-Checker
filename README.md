@@ -21,7 +21,7 @@ To run FireFly locally, follow the steps below:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/<username>/<repository>.git
+git clone https://github.com/<Yasiraleee>/<FireFly-Spell-Checker>.git
 ```
 
 2. Install the required dependencies. Ensure that Python is installed on your system.
