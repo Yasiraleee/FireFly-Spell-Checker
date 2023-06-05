@@ -1,0 +1,469 @@
+{% extends "base.html" %}
+{%include "header.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Magra&family=Share+Tech+Mono&display=swap');
+.errormsg{
+display:none;
+}
+.errorms{
+display:none;
+}
+.errorm{
+display:none;
+}
+.error{
+display:none;
+}
+    textarea{
+    width: 100%;
+    }
+    body {
+        font-family: 'Magra', sans-serif;
+  background-image: url('https://png.pngtree.com/background/20230319/original/pngtree-summer-fireflies-night-scene-picture-image_2151013.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+                 <div class="alert alert-danger errormsg" role="alert">
+                Enter some text to Error Check!
+                </div>
+                <h2><b>Orthography Verification Tool: </b><button type="button" class="btn btn-success float-right" onclick="errorcorrection()">Submit Data</button></h2>
+                <table class="table table-hover table-dark">
+                <col width="50%">
+                 <th class="border-right">Error Identifier</th>
+               <th class="border-right">Corrector</th>
+                <tr>
+                    <td class="border-right" id="words"><textarea width="100%" rows="10" spellcheck="true" id="ErrorId"></textarea><b><div id="misword"><font color="red" face="Arial">Misspelled Words: <a id="miswordinside"></a></font></div></b></td>
+                    <td class="border-right" ><textarea width="100%" rows="10" spellcheck="false" id="Realtime" readonly></textarea></td>
+                </tr>
+            </table>
+                 <div class="alert alert-danger errorms" role="alert">
+                Invalid Input Given!
+                </div>
+                <br>
+                <div>
+                     <button type="button" class="btn btn-success float-right" onclick="hello()">Submit</button>
+                </div>
+                <h3><b>Thesaurus:</b></h3>
+                <div>
+               <br><a><b>Word:&nbsp;&nbsp;&nbsp;</b></a>
+                    <input type="text" name="word" width="48" id="hello">
+                    </br>
+            </div>
+                </br>
+                <table class="table table-hover table-dark">
+                <col width="10%">
+                    <col width="50%">
+               <th class="border-right">Synonyms</th>
+                    <td class="border-right" id="Synonyms"></td>
+            </table>
+                </table>
+                <table class="table table-hover table-dark">
+                <col width="10%">
+                 <col width="50%">
+               <th class="border-right">Antonyms</th>
+                    <td class="border-right" id="Antonyms"></td>
+            </table>
+                 <div class="alert alert-danger errorm" role="alert">
+                Enter Some Input To Proceed!
+                </div>
+                <br>
+                <h3><b>Resemblance Checker:</b></h3>
+                </br>
+                <div>
+                     <button type="button" class="btn btn-success float-right" onclick="Similar()">Submit</button>
+                </div>
+                <div>
+               <a><b>Word 1:&nbsp;&nbsp;&nbsp;</b></a>
+                    <input type="text" name="word1" width="48" id="word1">
+                     <a><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word 2:&nbsp;&nbsp;&nbsp;</b></a>
+                    <input type="text" name="word2" width="48" id="word2">
+            </div><br>
+                </table>
+                <table class="table table-hover table-dark">
+                <col width="10%">
+                 <col width="50%">
+               <th class="border-right">Similarity</th>
+                    <td class="border-right" id="Similarity"></td>
+            </table>
+                </br>
+                <h4><b>Part Of Speech Checker:</b></h4>
+                <br>
+                <table class="table table-hover table-dark">
+                <col width="50%">
+                 <th class="border-right">POS Checker</th>
+                <tr>
+                    <td class="border-right" ><textarea width="100%" rows="10" spellcheck="true" id="POS"></textarea> <div><font color="green" face="Arial"><b>Word Count:   </b></font><a id="countingword"></a></div></td>
+                </tr>
+            </table>
+                <div>
+                     <table class="table table-hover table-dark">
+                <col width="10%">
+                 <col width="50%">
+               <th class="border-right">Result</th>
+                         <td class="border-right" id="Result"><font color="green" face="Arial"><b><a id="resultbar"></a></b></font></td>
+            </table>
+                    <div class="alert alert-danger error" role="alert">
+                No Text Given!
+                </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn" onclick="pos()" style="background-color:#e0e0e0;">noun</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn" onclick="pos1()" style="background-color:#e0e0e0;">pronoun</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn" onclick="pos2()" style="background-color:#e0e0e0;">verb</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn" onclick="pos3()" style="background-color:#e0e0e0;">adjective</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn" onclick="pos4()" style="background-color:#e0e0e0;">adverb</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn" onclick="pos5()" style="background-color:#e0e0e0;">preposition</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn" onclick="pos6()" style="background-color:#e0e0e0;">conjunction</button>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn" onclick="pos7()"style="background-color:#e0e0e0;">punctuation</button>
+                </div>
+                </br>
+                <div class ="well text-center">
+                    &nbsp;&nbsp;&nbsp;
+                    <img src="https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png" width="50" onclick=window.location.href='https://www.facebook.com/' style="cursor: pointer;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="https://www.freepnglogos.com/uploads/logo-ig-png/logo-ig-instagram-new-logo-vector-download-13.png" width="50" onclick=window.location.href='https://www.instagram.com/' style="cursor: pointer;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-icon-circle-png-logo-8.png" width="50" onclick=window.location.href='https://www.twitter.com/' style="cursor: pointer;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function changeColor(){
+        // Get the text element
+        var text = document.getElementById("POS");
+
+        // Change the color to red
+        text.style.color = "red";
+      }
+function hello(){
+var userInput = document.getElementById("hello").value;
+let Synonyms = document.getElementById("Synonyms");
+let Antonyms = document.getElementById("Antonyms");
+let errorbox=document.querySelector(".errorms")
+if(!(userInput.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/check', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:userInput,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+    let synarray=data.synonymns.slice(1,5)
+    let antarray=data.antonyms.slice(0,5)
+  Synonyms.innerHTML=synarray.map(syn=>`${syn}`)
+  Antonyms.innerHTML=antarray.map(ant=>`${ant}`)
+}).catch(error => console.error('Error:', error));
+};
+function errorcorrection(){
+var ui = document.getElementById("ErrorId").value;
+let ErrorId = document.getElementById("Realtime");
+let miswordinside = document.getElementById("miswordinside");
+let errorbox=document.querySelector(".errormsg")
+if(!(ui.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/spell_checker', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+   ErrorId.innerHTML=data.ccsentence
+   miswordinside.innerHTML=data.count
+}).catch(error => console.error('Error:', error));
+};
+function Similar(){
+var ui1 = document.getElementById("word1").value;
+var ui2 = document.getElementById("word2").value;
+let Similarity = document.getElementById("Similarity");
+let errorbox=document.querySelector(".errorm")
+if(!(ui1.length > 0))  {
+    errorbox.style.display = "block"
+  }else if(!(ui2.length > 0)){
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/similarity', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui1,
+    title2:ui2,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+  Similarity.innerHTML=data.similarity
+}).catch(error => console.error('Error:', error));
+};
+function pos(){
+var ui = document.getElementById("POS").value;
+let result = document.getElementById("resultbar");
+let errorbox=document.querySelector(".error")
+let countingword=document.getElementById("countingword");
+if(!(ui.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/poss', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+   result.innerHTML=data.noun
+   countingword.innerHTML=data.count
+}).catch(error => console.error('Error:', error));
+};
+function pos1(){
+var ui = document.getElementById("POS").value;
+let result = document.getElementById("resultbar");
+let errorbox=document.querySelector(".error")
+let countingword=document.getElementById("countingword");
+if(!(ui.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/poss', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+   result.innerHTML=data.pronoun
+    countingword.innerHTML=data.count
+}).catch(error => console.error('Error:', error));
+};
+function pos2(){
+var ui = document.getElementById("POS").value;
+let result = document.getElementById("resultbar");
+let errorbox=document.querySelector(".error")
+let countingword=document.getElementById("countingword");
+if(!(ui.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/poss', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+   result.innerHTML=data.verb
+    countingword.innerHTML=data.count
+}).catch(error => console.error('Error:', error));
+};
+function pos3(){
+var ui = document.getElementById("POS").value;
+let result = document.getElementById("resultbar");
+let errorbox=document.querySelector(".error")
+let countingword=document.getElementById("countingword");
+if(!(ui.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/poss', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+   result.innerHTML=data.adjective
+    countingword.innerHTML=data.count
+}).catch(error => console.error('Error:', error));
+};
+function pos4(){
+var ui = document.getElementById("POS").value;
+let countingword=document.getElementById("countingword");
+let result = document.getElementById("resultbar");
+let errorbox=document.querySelector(".error")
+if(!(ui.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/poss', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+   result.innerHTML=data.adverb
+    countingword.innerHTML=data.count
+}).catch(error => console.error('Error:', error));
+};
+function pos5(){
+var ui = document.getElementById("POS").value;
+let countingword=document.getElementById("countingword");
+let result = document.getElementById("resultbar");
+let errorbox=document.querySelector(".error")
+if(!(ui.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/poss', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+   result.innerHTML=data.preposition
+    countingword.innerHTML=data.count
+}).catch(error => console.error('Error:', error));
+};
+function pos6(){
+var ui = document.getElementById("POS").value;
+let countingword=document.getElementById("countingword");
+let result = document.getElementById("resultbar");
+let errorbox=document.querySelector(".error")
+if(!(ui.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/poss', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+   result.innerHTML=data.conjunction
+    countingword.innerHTML=data.count
+}).catch(error => console.error('Error:', error));
+};
+function pos7(){
+var ui = document.getElementById("POS").value;
+let result = document.getElementById("resultbar");
+let errorbox=document.querySelector(".error")
+let countingword=document.getElementById("countingword");
+if(!(ui.length > 0))  {
+    errorbox.style.display = "block"
+  } else {
+    errorbox.style.display = "none"
+  }
+fetch('/api/poss', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ui,
+
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+   result.innerHTML=data.punction
+    countingword.innerHTML=data.count
+}).catch(error => console.error('Error:', error));
+};
+</script>
+{% endblock %}
