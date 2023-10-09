@@ -1,6 +1,6 @@
 # FireFly - Spell Check and Word Analysis Website
 
-FireFly is a spell checking website that provides a range of language-related features, including synonym and antonym finding, spelling checking, auto-correction, word resemblance checking, and part-of-speech identification. The backend of the website is built using Python, while the frontend is developed using HTML and CSS. This project was completed within a remarkable timeframe of just 24 days by Yasir.
+FireFly is a spell checking website that provides a range of language-related features, including synonym and antonym finding, spelling checking, auto-correction, word resemblance checking, and part-of-speech identification. The backend of the website is built using Python, while the frontend is developed using HTML and CSS. This project was completed within a remarkable timeframe of just 14 days by Yasir.
 
 ## Features
 
